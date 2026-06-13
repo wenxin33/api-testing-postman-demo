@@ -1,4 +1,16 @@
+
+注意：你的分支现在是 `master`，所以这里写 `master`，不要写 `main`。
+
+---
+
+## 四、完整 README 开头建议变成这样
+
+你可以把 README 前几段改成：
+
+```markdown
 # API Testing Postman Demo
+
+![Postman API Test](https://github.com/wenxin33/api-testing-postman-demo/actions/workflows/postman-api-test.yml/badge.svg)
 
 ## 1. Project Overview
 
@@ -6,7 +18,7 @@ This project is an API testing portfolio project based on Postman and Newman. Th
 
 The project covers common RESTful API testing scenarios, including list query, detail query, negative resource query, resource creation, resource update, and resource deletion.
 
-This project is designed to demonstrate basic API testing ability, Postman test scripting, Newman command-line execution, HTML test report generation, and test documentation.
+This project is designed to demonstrate basic API testing ability, Postman test scripting, Newman command-line execution, HTML test report generation, GitHub Actions CI execution, and test documentation.
 
 ## 2. Tech Stack
 
@@ -79,8 +91,27 @@ If the exported environment value is empty, the base URL can also be passed dire
 ```bash
 newman run "postman\jsonplaceholder_api_test.postman_collection.json" --env-var "base_url=https://jsonplaceholder.typicode.com"
 ```
+## 6.CI Automation
 
-## 6. Test Result
+This project uses GitHub Actions to run the Postman API test collection automatically.
+
+The workflow is triggered when code is pushed to the `master` branch or when a pull request is created.
+
+Workflow file:
+
+.github/workflows/postman-api-test.yml
+The CI workflow performs the following steps:
+
+Checkout repository
+Set up Node.js
+Install Newman
+Run the Postman Collection
+
+The Newman command used in GitHub Actions is:
+newman run postman/jsonplaceholder_api_test.postman_collection.json --env-var "base_url=https://jsonplaceholder.typicode.com"
+This allows the API test collection to be executed automatically in a cloud environment without manually opening Postman or running commands locally.
+
+## 7. Test Result
 
 The current test collection includes:
 
@@ -90,7 +121,7 @@ The current test collection includes:
 * Failed assertions: 0
 * HTML report: `reports/newman_report.html`
 
-## 7. Test Coverage
+## 8. Test Coverage
 
 This project covers:
 
@@ -102,14 +133,14 @@ This project covers:
 * Newman command-line execution
 * HTML report generation
 
-## 8. Documents
+## 9. Documents
 
 * [Test Plan](docs/test_plan.md)
 * [Test Cases](docs/test_cases.md)
 * [Bug Report](docs/bug_report.md)
 * [Test Summary Report](docs/test_summary_report.md)
 
-## 9. Notes
+## 10. Notes
 
 JSONPlaceholder is a fake online REST API. POST, PUT, and DELETE requests return simulated responses but do not actually persist data on the server.
 
